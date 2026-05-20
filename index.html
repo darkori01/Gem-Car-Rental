@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gem Car Rental</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <section class="auth-screen" id="auth-screen">
+    <div class="auth-visual" aria-label="Fleet tracking illustration">
+      <div class="auth-brand">
+        <div class="brand-mark">G</div>
+        <div>
+          <h1>Gem Car Rental</h1>
+          <p>Premium rentals, live vehicle visibility, and faster reservations.</p>
+        </div>
+      </div>
+      <div class="tracking-board">
+        <img src="./login-illustration.jpg" alt="Gem Car Rental Fleet" class="login-hero-img" />
+      </div>
+    </div>
+
+    <div class="auth-panel">
+      <div>
+        <p class="eyebrow">Secure access</p>
+        <h2 id="auth-title">Welcome back</h2>
+        <p class="auth-copy">Sign in securely as an admin to continue.</p>
+      </div>
+
+      <form class="auth-form active" id="login-form">
+        <label>
+          Email
+          <input id="login-email" type="email" autocomplete="email" placeholder="name@gemcarrental.com" required />
+        </label>
+        <label>
+          Password
+          <input id="login-password" type="password" autocomplete="current-password" placeholder="Enter password"
+            required />
+        </label>
+        <button class="primary-button" type="submit">Sign in</button>
+        <button class="text-button auth-link" id="forgot-password-button" type="button">Forgot password?</button>
+      </form>
+
+      <form class="auth-form" id="forgot-form">
+        <label>
+          Account email
+          <input id="forgot-email" type="email" autocomplete="email" placeholder="name@gemcarrental.com" required />
+        </label>
+        <button class="primary-button" type="submit">Send recovery code</button>
+        <button class="text-button auth-link" id="back-to-login-button" type="button">Back to login</button>
+      </form>
+      <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <div class="app-shell locked" id="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <div class="brand-mark">G</div>
+        <div>
+          <h1>Gem Car Rental</h1>
+          <p id="role-caption">Car rental management</p>
+        </div>
+      </div>
+
+
+
+      <nav class="nav-list active" data-role-nav="admin">
+        <button class="nav-item active" data-view="dashboard">
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="fleet">
+          <span>Vehicles</span>
+        </button>
+        <button class="nav-item" data-view="bookings">
+          <span>Bookings</span>
+        </button>
+        <button class="nav-item" data-view="tracking">
+          <span>Tracking</span>
+        </button>
+        <button class="nav-item" data-view="payments">
+          <span>Payments</span>
+        </button>
+
+      </nav>
+
+
+
+      <div class="sidebar-card">
+        <p class="muted">Today</p>
+        <strong id="side-summary-title">12 pickups</strong>
+        <span id="side-summary-copy">6 returns due before 6 PM</span>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Operations center</p>
+          <h2 id="page-title">Dashboard</h2>
+        </div>
+        <div class="topbar-actions">
+          <div class="user-profile" id="session-pill">
+            <div class="avatar" id="user-avatar">G</div>
+            <div class="profile-info">
+              <div class="profile-name" id="profile-name">Gem Manager</div>
+              <div class="profile-role" id="profile-role">admin</div>
+            </div>
+          </div>
+          <label class="search-field">
+            <span>Search</span>
+            <input id="global-search" type="search" placeholder="Plate, vehicle, booking..." />
+          </label>
+          <button class="secondary-button" id="export-button">Export</button>
+          <button class="primary-button" id="new-booking-button">New booking</button>
+          <button class="secondary-button" id="logout-button">Logout</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboard">
+        <div class="metric-grid">
+          <article class="metric-card" data-dashboard-card="fleet" tabindex="0" role="button">
+            <p>Available cars</p>
+            <strong>38</strong>
+            <span>7 ready in premium class</span>
+          </article>
+          <article class="metric-card" data-dashboard-card="bookings-active" tabindex="0" role="button">
+            <p>Active rentals</p>
+            <strong>64</strong>
+            <span>92% vehicle utilization</span>
+          </article>
+          <article class="metric-card warning" data-dashboard-card="bookings-overdue" tabindex="0" role="button">
+            <p>Overdue returns</p>
+            <strong>5</strong>
+            <span>Requires follow-up</span>
+          </article>
+          <article class="metric-card">
+            <p>Revenue today</p>
+            <strong>₵18,420</strong>
+            <span>+14% vs yesterday</span>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel wide-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Schedule</p>
+                <h3>Today's movement</h3>
+              </div>
+              <button class="text-button" data-view-jump="bookings">Open bookings</button>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <time>09:00</time>
+                <div>
+                  <strong>Pickup: Toyota Camry</strong>
+                  <span>Sarah Mills - BK-1048 - Downtown branch</span>
+                </div>
+                <b class="status confirmed">Confirmed</b>
+              </div>
+              <div class="timeline-item">
+                <time>11:30</time>
+                <div>
+                  <strong>Return: BMW X3</strong>
+                  <span>Daniel Cole - Damage inspection required</span>
+                </div>
+                <b class="status inspection">Inspect</b>
+              </div>
+              <div class="timeline-item">
+                <time>15:00</time>
+                <div>
+                  <strong>Pickup: Hyundai Tucson</strong>
+                  <span>Corporate booking - 5-day rental</span>
+                </div>
+                <b class="status pending">Pending payment</b>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Alerts</p>
+                <h3>Needs attention</h3>
+              </div>
+            </div>
+            <div class="alert-list" id="dashboard-alert-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="fleet">
+        <div class="section-toolbar">
+          <div>
+            <p class="eyebrow">Vehicle inventory</p>
+            <h3>Vehicles</h3>
+          </div>
+          <div class="toolbar-actions">
+            <div class="segmented-control" role="group" aria-label="Vehicle filter">
+              <button class="segment active" data-fleet-filter="all">All</button>
+              <button class="segment" data-fleet-filter="available">Available</button>
+              <button class="segment" data-fleet-filter="rented">Rented</button>
+              <button class="segment" data-fleet-filter="maintenance">Maintenance</button>
+            </div>
+            <button class="primary-button" data-view-jump="add-vehicle">Add vehicle</button>
+          </div>
+        </div>
+        <div class="vehicle-grid" id="vehicle-grid"></div>
+      </section>
+
+      <section class="view" id="add-vehicle">
+        <div class="customer-layout vehicle-management-section">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Vehicle registration</p>
+                <h3>Add vehicle</h3>
+              </div>
+            </div>
+            <form class="vehicle-form" id="add-vehicle-form">
+              <label>
+                Vehicle type
+                <select id="vehicle-type" required>
+                  <option>Sedan</option>
+                  <option>SUV</option>
+                  <option>Premium SUV</option>
+                </select>
+              </label>
+              <label>
+                Vehicle name
+                <input id="vehicle-name" type="text" placeholder="Toyota Camry 2024" required />
+              </label>
+              <label>
+                Number plate
+                <input id="vehicle-plate" type="text" placeholder="GC-2048" required />
+              </label>
+              <label>
+                Branch
+                <input id="vehicle-branch" type="text" placeholder="Airport" required />
+              </label>
+              <label>
+                Mileage
+                <input id="vehicle-mileage" type="text" placeholder="10,500 mi" required />
+              </label>
+              <label>
+                Daily rate
+                <input id="vehicle-rate" type="number" placeholder="95" min="1" required />
+              </label>
+              <label>
+                Status
+                <select id="vehicle-status">
+                  <option value="available">Available</option>
+                  <option value="rented">Rented</option>
+                  <option value="maintenance">Maintenance</option>
+                </select>
+              </label>
+              <label>
+                Vehicle picture URL
+                <input id="vehicle-image" type="url" placeholder="https://example.com/car.jpg" />
+              </label>
+              <button class="primary-button" type="submit">Save vehicle</button>
+            </form>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Preview</p>
+                <h3>Vehicle card</h3>
+              </div>
+            </div>
+            <div id="vehicle-preview"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="bookings">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Reservations</p>
+              <h3>Bookings and rentals</h3>
+            </div>
+            <button class="primary-button" data-open-booking>New booking</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Booking</th>
+                  <th>Customer</th>
+                  <th>Vehicle</th>
+                  <th>Pickup</th>
+                  <th>Return</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="booking-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="tracking">
+        <div class="tracking-layout">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Fleet location</p>
+                <h3>Vehicle tracking</h3>
+              </div>
+            </div>
+            <label class="tracking-search-field">
+              Search vehicle
+              <input id="tracking-search" type="search" placeholder="Brand, model, or plate number" />
+            </label>
+            <div class="tracking-results" id="tracking-results"></div>
+          </section>
+          <section class="panel detail-panel" id="tracking-detail"></section>
+        </div>
+      </section>
+
+      <section class="view" id="payments">
+        <div class="metric-grid compact">
+          <article class="metric-card">
+            <p>Paid invoices</p>
+            <strong>₵72,880</strong>
+            <span>This month</span>
+          </article>
+          <article class="metric-card warning">
+            <p>Outstanding</p>
+            <strong>₵9,460</strong>
+            <span>11 open balances</span>
+          </article>
+          <article class="metric-card">
+            <p>Deposits held</p>
+            <strong>₵14,250</strong>
+            <span>Refundable after return</span>
+          </article>
+        </div>
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Finance</p>
+              <h3>Recent payments</h3>
+            </div>
+          </div>
+          <div class="payment-list" id="payment-list"></div>
+        </section>
+      </section>
+
+
+
+
+    </main>
+  </div>
+
+  <dialog class="booking-modal" id="booking-modal">
+    <form method="dialog">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Create rental</p>
+          <h3>New booking</h3>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="Close" formnovalidate>x</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          Customer
+          <input id="booking-customer" type="text" placeholder="Enter customer name" />
+        </label>
+        <label>
+          Vehicles registered
+          <select id="booking-vehicle" required>
+            <option value="" selected disabled>Select vehicle</option>
+          </select>
+        </label>
+        <label>
+          Pickup date
+          <input id="booking-pickup" type="date" />
+        </label>
+        <label>
+          Return date
+          <input id="booking-return" type="date" />
+        </label>
+        <label>
+          Daily rate
+          <input id="booking-rate" type="number" placeholder="Enter daily rate" />
+        </label>
+        <label>
+          Deposit
+          <input id="booking-deposit" type="number" placeholder="Enter deposit amount" />
+        </label>
+        <div class="booking-payment-method">
+          <span class="field-label">Payment method</span>
+          <div class="radio-group">
+            <label class="radio-inline">
+              <input type="radio" name="booking-payment-method" value="Mobile money" checked />
+              <span>Mobile money</span>
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="booking-payment-method" value="Cash" />
+              <span>Cash</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <label class="full-field">
+        Notes
+        <textarea id="booking-notes" rows="4" placeholder="Enter booking notes"></textarea>
+      </label>
+
+      <div class="booking-estimate-panel" id="booking-estimate-panel">
+        <div class="estimate-row">
+          <span>Rental Duration:</span>
+          <strong id="booking-est-days">0 days</strong>
+        </div>
+        <div class="estimate-row">
+          <span>Total Rental Cost:</span>
+          <strong id="booking-est-total">₵0.00</strong>
+        </div>
+        <div class="estimate-row" id="booking-balance-row">
+          <span id="booking-balance-label">Arrears:</span>
+          <strong id="booking-balance-amount">GHS 0.00</strong>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="secondary-button" value="cancel" formnovalidate>Cancel</button>
+        <button class="primary-button" value="default">Save booking</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="booking-modal" id="booking-detail-modal">
+    <form method="dialog">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Booking details</p>
+          <h3 id="booking-detail-title">Booking detail</h3>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="Close" formnovalidate>x</button>
+      </div>
+
+      <div class="vehicle-detail-body" id="booking-detail-content"></div>
+
+      <div class="modal-actions">
+        <button class="secondary-button" value="cancel" formnovalidate>Close</button>
+        <button class="secondary-button danger-button" type="button" id="booking-detail-delete">Delete booking</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="booking-modal" id="vehicle-detail-modal">
+    <form method="dialog">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Vehicle details</p>
+          <h3 id="vehicle-detail-title">Vehicle detail</h3>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="Close" formnovalidate>x</button>
+      </div>
+
+      <div class="vehicle-detail-body" id="vehicle-detail-content"></div>
+
+      <div class="modal-actions">
+        <button class="secondary-button" value="cancel" formnovalidate>Close</button>
+        <button class="secondary-button danger-button" type="button" id="vehicle-detail-delete">Delete vehicle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Export prepared</div>
+  <script src="./app.js"></script>
+</body>
+
+</html>
