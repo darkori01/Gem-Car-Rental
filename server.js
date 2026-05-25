@@ -5,207 +5,10 @@ const path = require("path");
 const PORT = Number(process.env.PORT || 4174);
 const PUBLIC_DIR = __dirname;
 
-const vehicles = [
-  {
-    id: "v1",
-    model: "Toyota Camry 2024",
-    plate: "GT-1842",
-    className: "Sedan",
-    status: "available",
-    mileage: "12,420 mi",
-    branch: "Downtown",
-    dailyRate: 68,
-    color: "#7d8d9b",
-    image:
-      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "v2",
-    model: "BMW X3 2023",
-    plate: "CR-9208",
-    className: "Premium SUV",
-    status: "rented",
-    mileage: "22,105 mi",
-    branch: "Airport",
-    dailyRate: 145,
-    color: "#2f3d47",
-    image:
-      "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "v3",
-    model: "Hyundai Tucson 2024",
-    plate: "AS-7732",
-    className: "SUV",
-    status: "available",
-    mileage: "8,902 mi",
-    branch: "East Side",
-    dailyRate: 92,
-    color: "#c6b784",
-    image:
-      "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "v4",
-    model: "Nissan Rogue 2022",
-    plate: "GT-5091",
-    className: "SUV",
-    status: "maintenance",
-    mileage: "61,200 mi",
-    branch: "Workshop",
-    dailyRate: 85,
-    color: "#8a9790",
-    image:
-      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "v5",
-    model: "Honda Accord 2023",
-    plate: "GT-4421",
-    className: "Sedan",
-    status: "available",
-    mileage: "19,780 mi",
-    branch: "Downtown",
-    dailyRate: 74,
-    color: "#324f63",
-    image:
-      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "v6",
-    model: "Ford Explorer 2022",
-    plate: "CR-6615",
-    className: "Premium SUV",
-    status: "rented",
-    mileage: "34,910 mi",
-    branch: "Airport",
-    dailyRate: 125,
-    color: "#b7c0c9",
-    image:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80"
-  }
-];
-
-const bookings = [
-  {
-    id: "BK-1048",
-    customer: "Sarah Mills",
-    vehicle: "Toyota Camry",
-    vehicleClass: "Sedan",
-    pickup: "15 May, 09:00",
-    returnDate: "18 May, 17:00",
-    status: "Confirmed",
-    total: 356
-  },
-  {
-    id: "BK-1047",
-    customer: "Daniel Cole",
-    vehicle: "BMW X3",
-    vehicleClass: "Premium SUV",
-    pickup: "12 May, 10:30",
-    returnDate: "15 May, 11:30",
-    status: "Inspect",
-    total: 721
-  },
-  {
-    id: "BK-1046",
-    customer: "Nova Build Ltd.",
-    vehicle: "Hyundai Tucson",
-    vehicleClass: "SUV",
-    pickup: "15 May, 15:00",
-    returnDate: "20 May, 12:00",
-    status: "Pending payment",
-    total: 610
-  },
-  {
-    id: "BK-1045",
-    customer: "Anthony Reed",
-    vehicle: "Ford Explorer",
-    vehicleClass: "Premium SUV",
-    pickup: "14 May, 08:00",
-    returnDate: "17 May, 08:00",
-    status: "Confirmed",
-    total: 510
-  },
-  {
-    id: "BK-1044",
-    customer: "Maya Johnson",
-    vehicle: "Honda Accord",
-    vehicleClass: "Sedan",
-    pickup: "13 May, 13:00",
-    returnDate: "15 May, 13:00",
-    status: "Overdue",
-    total: 238
-  }
-];
-
-const customers = [
-  {
-    id: "c1",
-    name: "Sarah Mills",
-    phone: "+1 555 0193",
-    email: "sarah.mills@example.com",
-    license: "D-4928372",
-    rentals: 9,
-    spend: 4280,
-    status: "Verified",
-    riskNotes: "No active restrictions",
-    photo:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "c2",
-    name: "Daniel Cole",
-    phone: "+1 555 0148",
-    email: "daniel.cole@example.com",
-    license: "D-7701835",
-    rentals: 4,
-    spend: 2145,
-    status: "Inspection pending",
-    riskNotes: "Return inspection open",
-    photo:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "c3",
-    name: "Maya Johnson",
-    phone: "+1 555 0188",
-    email: "maya.johnson@example.com",
-    license: "D-6391200",
-    rentals: 12,
-    spend: 6910,
-    status: "VIP",
-    riskNotes: "No active restrictions",
-    photo:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    id: "c4",
-    name: "Nova Build Ltd.",
-    phone: "+1 555 0164",
-    email: "fleet@novabuild.example",
-    license: "Corporate",
-    rentals: 21,
-    spend: 18660,
-    status: "Corporate",
-    riskNotes: "Approved monthly billing",
-    photo:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80"
-  }
-];
-
-const payments = [
-  { bookingId: "BK-1048", customer: "Sarah Mills", method: "Card", amount: 356, status: "Paid" },
-  { bookingId: "BK-1047", customer: "Daniel Cole", method: "Deposit hold", amount: 500, status: "Held" },
-  {
-    bookingId: "BK-1046",
-    customer: "Nova Build Ltd.",
-    method: "Bank transfer",
-    amount: 610,
-    status: "Outstanding"
-  },
-  { bookingId: "BK-1044", customer: "Maya Johnson", method: "Late fee", amount: 64, status: "Due" }
-];
+const vehicles = [];
+const bookings = [];
+const customers = [];
+const payments = [];
 
 
 
@@ -374,7 +177,7 @@ async function handleApi(req, res, pathname) {
     }
 
     const created = {
-      id: `v${vehicles.length + 1}`,
+      id: `v${Date.now()}`,
       model: payload.model,
       plate: payload.plate,
       className: payload.className,
@@ -383,9 +186,7 @@ async function handleApi(req, res, pathname) {
       branch: payload.branch || "Main branch",
       dailyRate: Number(payload.dailyRate || 0),
       color: "#f97316",
-      image:
-        payload.image ||
-        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=900&q=80"
+      image: payload.image || ""
     };
 
     vehicles.unshift(created);
@@ -409,7 +210,7 @@ async function handleApi(req, res, pathname) {
     const arrearsAmount = Math.max(0, total - deposit);
 
     const created = {
-      id: `BK-${1049 + bookings.length}`,
+      id: `BK-${String(bookings.length + 1).padStart(4, "0")}`,
       customer: payload.customer,
       vehicle: payload.vehicleModel || `${payload.vehicleClass} assignment`,
       vehicleClass: payload.vehicleClass,
@@ -472,7 +273,7 @@ async function handleApi(req, res, pathname) {
     }
 
     const created = {
-      id: `c${customers.length + 1}`,
+      id: `c${Date.now()}`,
       name: payload.name,
       phone: payload.phone || "",
       email: payload.email,
@@ -481,9 +282,7 @@ async function handleApi(req, res, pathname) {
       spend: 0,
       status: payload.status || "New",
       riskNotes: payload.notes || "Created by admin",
-      photo:
-        payload.photo ||
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80"
+      photo: payload.photo || ""
     };
 
     customers.unshift(created);

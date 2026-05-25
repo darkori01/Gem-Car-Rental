@@ -10,15 +10,15 @@
 
 <body>
   <section class="auth-screen" id="auth-screen">
-    <div class="auth-visual" aria-label="Fleet tracking illustration">
+    <div class="auth-visual" aria-label="Fleet management illustration">
       <div class="auth-brand">
         <div class="brand-mark">G</div>
         <div>
           <h1>Gem Car Rental</h1>
-          <p>Premium rentals, live vehicle visibility, and faster reservations.</p>
+          <p>Premium rentals, vehicle management, and faster reservations.</p>
         </div>
       </div>
-      <div class="tracking-board">
+      <div class="fleet-board">
         <img src="./login-illustration.jpg" alt="Gem Car Rental Fleet" class="login-hero-img" />
       </div>
     </div>
@@ -78,9 +78,6 @@
         <button class="nav-item" data-view="bookings">
           <span>Bookings</span>
         </button>
-        <button class="nav-item" data-view="tracking">
-          <span>Tracking</span>
-        </button>
         <button class="nav-item" data-view="payments">
           <span>Payments</span>
         </button>
@@ -91,8 +88,8 @@
 
       <div class="sidebar-card">
         <p class="muted">Today</p>
-        <strong id="side-summary-title">12 pickups</strong>
-        <span id="side-summary-copy">6 returns due before 6 PM</span>
+        <strong id="side-summary-title">Ready for launch</strong>
+        <span id="side-summary-copy">Add real vehicles and bookings to begin.</span>
       </div>
     </aside>
 
@@ -124,23 +121,23 @@
         <div class="metric-grid">
           <article class="metric-card" data-dashboard-card="fleet" tabindex="0" role="button">
             <p>Available cars</p>
-            <strong>38</strong>
-            <span>7 ready in premium class</span>
+            <strong>0</strong>
+            <span>Registered vehicles</span>
           </article>
           <article class="metric-card" data-dashboard-card="bookings-active" tabindex="0" role="button">
             <p>Active rentals</p>
-            <strong>64</strong>
-            <span>92% vehicle utilization</span>
+            <strong>0</strong>
+            <span>Bookings not overdue</span>
           </article>
           <article class="metric-card warning" data-dashboard-card="bookings-overdue" tabindex="0" role="button">
             <p>Overdue returns</p>
-            <strong>5</strong>
+            <strong>0</strong>
             <span>Requires follow-up</span>
           </article>
           <article class="metric-card">
             <p>Revenue today</p>
-            <strong>₵18,420</strong>
-            <span>+14% vs yesterday</span>
+            <strong>GHS 0</strong>
+            <span>Confirmed paid revenue</span>
           </article>
         </div>
 
@@ -155,28 +152,12 @@
             </div>
             <div class="timeline">
               <div class="timeline-item">
-                <time>09:00</time>
+                <time>--:--</time>
                 <div>
-                  <strong>Pickup: Toyota Camry</strong>
-                  <span>Sarah Mills - BK-1048 - Downtown branch</span>
+                  <strong>No vehicle movement scheduled yet</strong>
+                  <span>New bookings will appear here once real reservations are added.</span>
                 </div>
-                <b class="status confirmed">Confirmed</b>
-              </div>
-              <div class="timeline-item">
-                <time>11:30</time>
-                <div>
-                  <strong>Return: BMW X3</strong>
-                  <span>Daniel Cole - Damage inspection required</span>
-                </div>
-                <b class="status inspection">Inspect</b>
-              </div>
-              <div class="timeline-item">
-                <time>15:00</time>
-                <div>
-                  <strong>Pickup: Hyundai Tucson</strong>
-                  <span>Corporate booking - 5-day rental</span>
-                </div>
-                <b class="status pending">Pending payment</b>
+                <b class="status confirmed">Ready</b>
               </div>
             </div>
           </section>
@@ -232,23 +213,23 @@
               </label>
               <label>
                 Vehicle name
-                <input id="vehicle-name" type="text" placeholder="Toyota Camry 2024" required />
+                <input id="vehicle-name" type="text" placeholder="Enter vehicle name" required />
               </label>
               <label>
                 Number plate
-                <input id="vehicle-plate" type="text" placeholder="GC-2048" required />
+                <input id="vehicle-plate" type="text" placeholder="Enter number plate" required />
               </label>
               <label>
                 Branch
-                <input id="vehicle-branch" type="text" placeholder="Airport" required />
+                <input id="vehicle-branch" type="text" placeholder="Enter branch" required />
               </label>
               <label>
                 Mileage
-                <input id="vehicle-mileage" type="text" placeholder="10,500 mi" required />
+                <input id="vehicle-mileage" type="text" placeholder="Enter mileage" required />
               </label>
               <label>
                 Daily rate
-                <input id="vehicle-rate" type="number" placeholder="95" min="1" required />
+                <input id="vehicle-rate" type="number" placeholder="Enter daily rate" min="1" required />
               </label>
               <label>
                 Status
@@ -260,7 +241,7 @@
               </label>
               <label>
                 Vehicle picture URL
-                <input id="vehicle-image" type="url" placeholder="https://example.com/car.jpg" />
+                <input id="vehicle-image" type="url" placeholder="Optional image URL" />
               </label>
               <button class="primary-button" type="submit">Save vehicle</button>
             </form>
@@ -307,41 +288,22 @@
         </div>
       </section>
 
-      <section class="view" id="tracking">
-        <div class="tracking-layout">
-          <section class="panel">
-            <div class="panel-header">
-              <div>
-                <p class="eyebrow">Fleet location</p>
-                <h3>Vehicle tracking</h3>
-              </div>
-            </div>
-            <label class="tracking-search-field">
-              Search vehicle
-              <input id="tracking-search" type="search" placeholder="Brand, model, or plate number" />
-            </label>
-            <div class="tracking-results" id="tracking-results"></div>
-          </section>
-          <section class="panel detail-panel" id="tracking-detail"></section>
-        </div>
-      </section>
-
       <section class="view" id="payments">
         <div class="metric-grid compact">
           <article class="metric-card">
             <p>Paid invoices</p>
-            <strong>₵72,880</strong>
-            <span>This month</span>
+            <strong>GHS 0</strong>
+            <span>Confirmed payments</span>
           </article>
           <article class="metric-card warning">
             <p>Outstanding</p>
-            <strong>₵9,460</strong>
-            <span>11 open balances</span>
+            <strong>GHS 0</strong>
+            <span>0 open balances</span>
           </article>
           <article class="metric-card">
             <p>Deposits held</p>
-            <strong>₵14,250</strong>
-            <span>Refundable after return</span>
+            <strong>GHS 0</strong>
+            <span>Refundable deposits</span>
           </article>
         </div>
         <section class="panel">
@@ -477,6 +439,18 @@
       </div>
     </form>
   </dialog>
+
+  <div class="loading-overlay show" id="loading-overlay" role="status" aria-live="polite">
+    <div class="loading-card">
+      <div class="loading-mark" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <strong id="loading-title">Preparing dashboard</strong>
+      <p id="loading-copy">Loading fleet records and reservations...</p>
+    </div>
+  </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite">Export prepared</div>
   <script src="./app.js"></script>

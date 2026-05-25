@@ -11,8 +11,10 @@
   --danger: #b42318;
   --warning: #b45309;
   --blue: #315d9a;
+  --success: #15803d;
   --radius: 8px;
   --shadow: 0 18px 48px rgba(124, 45, 18, 0.13);
+  --shadow-hover: 0 24px 58px rgba(124, 45, 18, 0.2);
 }
 
 * {
@@ -21,7 +23,11 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    linear-gradient(135deg, rgba(255, 247, 237, 0.92), rgba(239, 246, 255, 0.86)),
+    radial-gradient(circle at 18% 10%, rgba(255, 183, 3, 0.22), transparent 28%),
+    radial-gradient(circle at 82% 6%, rgba(49, 93, 154, 0.16), transparent 30%),
+    var(--bg);
   color: var(--ink);
   font-family:
     "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -32,6 +38,8 @@ body {
 
 .auth-screen {
   background:
+    radial-gradient(circle at 20% 18%, rgba(255, 183, 3, 0.26), transparent 28%),
+    radial-gradient(circle at 84% 82%, rgba(49, 93, 154, 0.22), transparent 30%),
     linear-gradient(135deg, rgba(124, 45, 18, 0.94), rgba(249, 115, 22, 0.84)),
     #7c2d12;
   display: grid;
@@ -77,7 +85,7 @@ body {
   margin-top: 4px;
 }
 
-.tracking-board {
+.fleet-board {
   aspect-ratio: 1.5;
   background:
     radial-gradient(circle at 18% 24%, rgba(255, 183, 3, 0.22), transparent 22%),
@@ -260,34 +268,6 @@ body {
   bottom: 88px;
 }
 
-.tracking-card {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  color: var(--ink);
-  padding: 14px;
-  position: absolute;
-  width: 220px;
-}
-
-.tracking-card span {
-  color: var(--muted);
-  display: block;
-  font-size: 13px;
-  margin-top: 4px;
-}
-
-.card-one {
-  left: 34px;
-  bottom: 34px;
-}
-
-.card-two {
-  right: 34px;
-  top: 34px;
-}
-
 .auth-panel {
   align-self: center;
   background: #ffffff;
@@ -371,6 +351,19 @@ button {
   cursor: pointer;
 }
 
+button,
+a,
+input,
+select,
+textarea {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
 .app-shell {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
@@ -378,7 +371,9 @@ button {
 }
 
 .sidebar {
-  background: #7c2d12;
+  background:
+    linear-gradient(180deg, rgba(124, 45, 18, 0.98), rgba(154, 52, 18, 0.96)),
+    #7c2d12;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -608,6 +603,14 @@ button {
 
 .primary-button:hover {
   background: var(--brand-dark);
+  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.28);
+  transform: translateY(-1px);
+}
+
+.secondary-button:hover {
+  border-color: #fdba74;
+  box-shadow: 0 9px 20px rgba(124, 45, 18, 0.09);
+  transform: translateY(-1px);
 }
 
 .secondary-button {
@@ -662,7 +665,30 @@ button {
 }
 
 .metric-card {
+  overflow: hidden;
   padding: 15px;
+  position: relative;
+}
+
+.metric-card::before {
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  content: "";
+  height: 3px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.metric-card.warning::before {
+  background: linear-gradient(90deg, var(--danger), var(--warning));
+}
+
+.metric-card:hover,
+.panel:hover,
+.vehicle-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .metric-card p {
@@ -798,7 +824,6 @@ button {
 .alert-item span,
 .vehicle-card span,
 .customer-row span,
-.tracking-row span,
 .payment-row span,
 .maintenance-row span,
 .renewal-list span,
@@ -902,6 +927,7 @@ button {
 
 .vehicle-card {
   overflow: hidden;
+  position: relative;
 }
 
 .vehicle-image {
@@ -928,6 +954,22 @@ button {
 .vehicle-image .plate {
   position: relative;
   z-index: 1;
+}
+
+.vehicle-card::after {
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.85), rgba(255, 183, 3, 0.85));
+  content: "";
+  height: 3px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 160ms ease;
+}
+
+.vehicle-card:hover::after {
+  opacity: 1;
 }
 
 .plate {
@@ -1019,6 +1061,37 @@ button {
   padding: 5px 7px;
 }
 
+.vehicle-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.vehicle-actions .secondary-button {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 38px;
+  text-decoration: none;
+}
+
+.track-button {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: var(--brand-dark);
+}
+
+.track-button:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #ffffff;
+}
+
+.danger-button {
+  color: var(--danger);
+}
+
 .table-wrap {
   overflow: auto;
 }
@@ -1063,19 +1136,13 @@ td {
   color: #be123c;
 }
 
-.customer-layout,
-.tracking-layout {
+.customer-layout {
   display: grid;
   gap: 14px;
   grid-template-columns: minmax(330px, 0.85fr) minmax(0, 1.15fr);
 }
 
-.tracking-search-field {
-  margin-bottom: 12px;
-}
-
-.customer-row,
-.tracking-row {
+.customer-row {
   align-items: center;
   display: flex;
   gap: 10px;
@@ -1084,19 +1151,9 @@ td {
   width: 100%;
 }
 
-.customer-row.active,
-.tracking-row.active {
+.customer-row.active {
   border-color: var(--brand);
   box-shadow: inset 3px 0 0 var(--brand);
-}
-
-.tracking-results {
-  display: grid;
-  gap: 8px;
-}
-
-.tracking-map {
-  margin-bottom: 14px;
 }
 
 .avatar {
@@ -1221,6 +1278,96 @@ label textarea {
   margin-top: 16px;
 }
 
+.loading-overlay {
+  align-items: center;
+  background: rgba(255, 247, 237, 0.72);
+  backdrop-filter: blur(10px);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 180ms ease;
+  z-index: 20;
+}
+
+.loading-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-card {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 28px 70px rgba(124, 45, 18, 0.18);
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  max-width: 320px;
+  padding: 24px;
+  text-align: center;
+}
+
+.loading-card p,
+.loading-card strong {
+  margin: 0;
+}
+
+.loading-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.loading-mark {
+  align-items: end;
+  display: flex;
+  gap: 5px;
+  height: 42px;
+  margin-bottom: 4px;
+}
+
+.loading-mark span {
+  animation: loading-rise 860ms infinite ease-in-out;
+  background: linear-gradient(180deg, var(--accent), var(--brand));
+  border-radius: 999px;
+  display: block;
+  height: 18px;
+  width: 8px;
+}
+
+.loading-mark span:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.loading-mark span:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+@keyframes loading-rise {
+  0%,
+  100% {
+    height: 16px;
+    opacity: 0.72;
+  }
+  50% {
+    height: 38px;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
 .toast {
   background: #172026;
   border-radius: var(--radius);
@@ -1249,7 +1396,7 @@ label textarea {
     padding-bottom: 0;
   }
 
-  .tracking-board {
+  .fleet-board {
     max-width: none;
   }
 
@@ -1263,8 +1410,7 @@ label textarea {
   }
 
   .content-grid,
-  .customer-layout,
-  .tracking-layout {
+  .customer-layout {
     grid-template-columns: 1fr;
   }
 }
@@ -1274,7 +1420,7 @@ label textarea {
     padding: 24px;
   }
 
-  .tracking-board {
+  .fleet-board {
     min-height: 320px;
   }
 
@@ -1352,90 +1498,6 @@ label textarea {
 .booking-estimate-panel strong {
   font-size: 15px;
   color: var(--brand-dark);
-}
-
-/* GPS Tracker Map in Vehicle Details Modal */
-.vehicle-gps-tracker {
-  margin-top: 12px;
-}
-
-.mock-gps-map {
-  position: relative;
-  height: 180px;
-  background: radial-gradient(circle at 50% 50%, #1e293b, #0f172a);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.mock-gps-map .map-lines {
-  position: absolute;
-  inset: 0;
-  background-size: 25px 25px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-}
-
-.mock-gps-map .gps-radar {
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  border: 2px solid rgba(249, 115, 22, 0.4);
-  border-radius: 50%;
-  animation: radar-pulse 2s infinite linear;
-}
-
-.mock-gps-map .gps-pin {
-  position: relative;
-  z-index: 2;
-  font-size: 2.2rem;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
-  animation: bounce-pin 1s infinite alternate;
-}
-
-.mock-gps-map .gps-label {
-  position: relative;
-  z-index: 2;
-  margin-top: 8px;
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 12px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-}
-
-.mock-gps-map .gps-coords {
-  position: relative;
-  z-index: 2;
-  margin-top: 2px;
-  color: var(--line);
-  font-family: monospace;
-  font-size: 10px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-}
-
-@keyframes radar-pulse {
-  0% {
-    transform: scale(0.4);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
-@keyframes bounce-pin {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
 }
 
 /* Booking modal payment method styling */
